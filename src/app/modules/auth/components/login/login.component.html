@@ -1,0 +1,66 @@
+<section class="flexbox-container">
+  <div class="col-12 d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="col-md-4 col-10 box-shadow-2 p-0">
+      <div class="card border-grey border-lighten-3 py-1 m-0">
+        <div class="card-header border-0 bg-white">
+          <div class="card-title text-center">
+            <img src="./assets/images/logo-grad.png" alt="branding logo" style="width: 100px;">
+          </div>
+          <h6 class="card-subtitle line-on-side text-muted text-center pt-2">
+            <span class="fs-18">تسجيل الدخول إلي النظام</span>
+          </h6>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+            <form class="form-horizontal" [formGroup]="form" (ngSubmit)="Login()">
+              <div class="py-2">
+                <div class="form-group m-form__group">
+                  <!-- <label>Left Icon</label> -->
+                  <div class="m-input-icon m-input-icon--left">
+                    <input type="text" [ngClass]="{'is-invalid': submitted && form.controls.userName.errors}" class="form-control m-input GE_Dinar_One_Medium" formControlName="userName" placeholder="إسم المستخدم">
+                    <div class="invalid-feedback position-absolute GE_Dinar_One_Medium" *ngIf="form.controls.userName.errors?.required">
+                      يجب إدخال اسم المستخدم
+                    </div>
+                    <span class="m-input-icon__icon m-input-icon__icon--left"><span><i class="la la-user"></i></span></span>
+                  </div>
+                </div>
+              </div>
+              <div class="py-2">
+                <div class="form-group m-form__group">
+                  <!-- <label>Left Icon</label> -->
+                  <div class="m-input-icon m-input-icon--left">
+                    <input type="password" class="form-control m-input GE_Dinar_One_Medium" formControlName="password" [ngClass]="{'is-invalid': submitted && form.controls.password.errors}" placeholder="كلمة المرور">
+                    <div class="invalid-feedback position-absolute GE_Dinar_One_Medium" *ngIf="form.controls.password.errors?.required">
+                      يجب إدخال كلمة المرور
+                    </div>
+                    <span class="m-input-icon__icon m-input-icon__icon--left"><span><i class="la la-lock"></i></span></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-1 pb-4">
+                <div class="row m-login__form-sub">
+                  <div class="col m--align-left">
+                    <label class="m-checkbox m-checkbox--focus fs-16 GE_Dinar_One_Medium">
+                      <input type="checkbox" name="rememberMe" />
+                      تذكرنى <span></span>
+                    </label>
+                  </div>
+                  <div class="col m--align-right"></div>
+                </div>
+              </div>
+
+              <div class="pt-3 pb-5">
+                <button type="submit" class="btn btn-outline-primary btn-block GE_Dinar_One_Medium fs-18"><i class="la la-sign-out"></i> إلي
+                  حسابي
+                </button>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

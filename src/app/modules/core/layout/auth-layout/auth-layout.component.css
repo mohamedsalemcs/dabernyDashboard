@@ -1,0 +1,28 @@
+.content-body {
+  position: relative;
+  background: rgb(2, 85, 151);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 85, 151, 1) 0%,
+    rgba(36, 42, 104, 1) 100%
+  );
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  min-height: 100vh;
+  margin: 0 !important;
+  /* background-position: center; */
+  /* background-position-y: -257px; */
+  font-family: MyriadProSemibold !important;
+}
+
+/* .content-body .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100;
+  display: block;
+  background: rgba(0, 0, 0, 0.4);
+} */
