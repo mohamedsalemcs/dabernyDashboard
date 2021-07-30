@@ -1,22 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthModule } from './modules/auth/auth.module';
-import { NavigationModule } from './modules/navigation/navigation.module';
 import { NotFoundComponent } from '@core/layout/not-found/not-found.component';
 import { NotAuthorizedComponent } from '@core/layout/not-authorized/not-authorized.component';
+import { LayoutModule } from './modules/layout/layout.module';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => AuthModule
+    loadChildren: () => LayoutModule,
   },
   {
     path: 'auth',
     loadChildren: () => AuthModule
-  },
-  {
-    path: 'navigation',
-    loadChildren: () => NavigationModule
   },
   { path: 'NotFound', component: NotFoundComponent },
   { path: 'NotAuthorized', component: NotAuthorizedComponent },
@@ -27,4 +23,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
