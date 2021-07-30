@@ -4,11 +4,11 @@ import { LanguageService } from '@core/services/language-service/language.servic
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-side-menu',
-  templateUrl: './side-menu.component.html',
-  styleUrls: ['./side-menu.component.css']
+  selector: 'app-questions-list',
+  templateUrl: './questions-list.component.html',
+  styleUrls: ['./questions-list.component.css']
 })
-export class SideMenuComponent extends BaseComponent implements OnInit {
+export class QuestionsListComponent extends BaseComponent implements OnInit {
 
   /* #region  Prroperties & Fields */
 

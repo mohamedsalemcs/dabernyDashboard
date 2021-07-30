@@ -1,11 +1,20 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+import { Language } from 'src/app/modules/core/enums/language';
+
+
+export const environment = {
+  production: false,
+
+  apiUrl: 'http://52.15.72.219:5050/api',
+  langKey: 'lang',
+  tokenKey: 'token',
+  loginProviderKey: 'loginProvider',
+  defaultLanguage: Language.Arabic
+};
 export const loading = {
   showLoading: false
-};
-export const environment = {
-  production: false
 };
 
 /*
