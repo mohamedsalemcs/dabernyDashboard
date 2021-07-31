@@ -13,6 +13,7 @@ import { UserRegisterationResult } from '../models/UserRegisterationResult';
 import { BaseService } from '../../core/services/base-service/base-service';
 import { UserLoginVM } from '../models/UserLoginVM';
 import { ChangePasswordVm } from '../models/change-password-vm';
+import { Reflection } from '@core/helpers/reflection';
 
 /* #endregion */
 
@@ -27,7 +28,7 @@ export class AuthService extends BaseService {
   @Output() authChanged: EventEmitter<boolean> = new EventEmitter();
 
   get UserFromToken() {
-    return localStorage.getItem(this.tokenKey) ? (JSON.parse(localStorage.getItem(this.tokenKey)) as UserRegisterationResult) : null;
+    return sessionStorage.getItem(this.tokenKey) ? (JSON.parse(sessionStorage.getItem(this.tokenKey)) as UserRegisterationResult) : null;
   }
 
   get currentUser() {
@@ -48,20 +49,74 @@ export class AuthService extends BaseService {
     private router: Router
   ) {
     super(http, `${environment.apiUrl}/Auth`);
+
+    this.setSessionAtStartUp();
+
+    if (window.addEventListener) {
+      window.addEventListener(
+        'storage',
+        (event: StorageEvent) => this.sessionStorageTransfer(event),
+        false
+      );
+    }
+    if (
+      !localStorage.getItem(this.tokenKey) &&
+      !sessionStorage.getItem(this.tokenKey)
+    ) {
+      localStorage.setItem('getSessionStorage', this.tokenKey);
+      localStorage.removeItem('getSessionStorage');
+    }
   }
   /* #endregion */
 
   /* #region  Methods */
-  saveLogin(user: UserRegisterationResult) {
+  sessionStorageTransfer(event: StorageEvent) {
+    if (!event.newValue) {
+      return;
+    }
+    // do nothing if no value to work with
+    if (event.key === 'logoutNow') {
+      this.removeToken();
+      this.goToLogin();
+    }
+    if (event.key === 'getSessionStorage') {
+      const obj = {};
+      obj[event.newValue] = sessionStorage.getItem(event.newValue);
+      // another tab asked for the sessionStorage -> send it
+      localStorage.setItem('sessionStorage', JSON.stringify(obj));
+      // the other tab should now have it, so we're done with it.
+      localStorage.removeItem('sessionStorage'); // <- could do short timeout as well.
+    } else if (event.key === 'sessionStorage') {
+      // another tab sent data <- get it
+      const data = Reflection.ObjectToKeyValueArray(JSON.parse(event.newValue));
+
+      if (data && data.length) {
+        if (data[0].key && data[0].value) {
+          sessionStorage.setItem(data[0].key, data[0].value);
+          if (data[0].key === this.tokenKey) {
+            window.location.reload();
+          }
+        }
+      }
+    }
+  }
+  goToLogin() {
+    this.router.navigate([AppUrls.auth.login]);
+  }
+  private setSessionAtStartUp() {
+    this.setToken(localStorage.getItem(this.tokenKey), false);
+  }
+
+  saveLogin(user: UserRegisterationResult, rememberMe: boolean) {
     if (user) {
-      this.setToken(JSON.stringify(user));
+      this.setToken(JSON.stringify(user), rememberMe);
     }
   }
   login(credentials: UserLoginVM) {
     return this.http.post(this.serviceBaseUrl + '/Login', credentials)
       .pipe(map((response: BaseResponse<UserRegisterationResult>) => {
         if (response && response.success && response.resource.isVerified && response.resource.isActive) {
-          this.saveLogin(response.resource);
+          this.saveLogin(response.resource, credentials.rememberMe);
           return response;
         }
         return response;
@@ -123,20 +178,23 @@ export class AuthService extends BaseService {
     }
   }
 
-  private setToken(token: string) {
+
+  setToken(token: string, rememberMe: boolean) {
     if (token && token.trim()) {
-      localStorage.setItem(this.tokenKey, token);
+      if (rememberMe === true) {
+        localStorage.setItem(this.tokenKey, token);
+      }
+      sessionStorage.setItem(this.tokenKey, token);
+
       if (this.authChanged) {
         this.authChanged.emit(true);
       }
     }
   }
-  private removeToken() {
-    localStorage.removeItem(this.tokenKey);
-    // if (this.authChanged) {
-    //   this.authChanged.emit(false);
-    // }
 
+  removeToken() {
+    localStorage.removeItem(this.tokenKey);
+    sessionStorage.removeItem(this.tokenKey);
   }
   /* #endregion */
 }

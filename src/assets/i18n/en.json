@@ -154,5 +154,10 @@
   "Twitter":"Twitter",
   "Share":"Share",
   "Download Daberny Android":"Download Daberny Android",
-  "Download Daberny Ios":"Download Daberny Ios"
+  "Download Daberny Ios":"Download Daberny Ios",
+
+  "Login to Admin":"Login to Admin",
+  "Username is required":"Username is required",
+  "Password is required":"Password is required",
+  "Remember me":"Remember me"
 }

@@ -1,4 +1,5 @@
 export const AppUrls = {
+  home: '/questions',
   auth: {
     login: '/auth/login'
   },

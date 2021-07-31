@@ -1,5 +1,4 @@
 
-import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { Language } from 'src/app/modules/core/enums/language';
 import { AppUrls } from '../helpers/app-urls';

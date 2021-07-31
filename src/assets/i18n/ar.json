@@ -152,5 +152,9 @@
   "Twitter":"تويتر",
   "Share":"شارك",
   "Download Daberny Android":"قم بتنزيل تطبيق دبرني Android",
-  "Download Daberny Ios":"قم بتنزيل تطبيق دبرني Ios"
+  "Download Daberny Ios":"قم بتنزيل تطبيق دبرني Ios",
+  "Login to Admin":"تسجيل الدخول إلي النظام",
+  "Username is required":"يجب إدخال اسم المستخدم",
+  "Password is required":"يجب إدخال كلمة المرور",
+  "Remember me":"تذكرنى"
 }
