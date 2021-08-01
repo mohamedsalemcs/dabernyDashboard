@@ -4,15 +4,19 @@ import { AuthModule } from './modules/auth/auth.module';
 import { NotFoundComponent } from '@core/layout/not-found/not-found.component';
 import { NotAuthorizedComponent } from '@core/layout/not-authorized/not-authorized.component';
 import { LayoutModule } from './modules/layout/layout.module';
+import { AuthGuard } from './modules/auth/guards/auth.guard';
+import { LoggedinGuard } from './modules/auth/guards/loggedin/loggedin.guard';
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () => LayoutModule,
+    canActivate: [AuthGuard]
   },
   {
     path: 'auth',
-    loadChildren: () => AuthModule
+    loadChildren: () => AuthModule,
+    canActivate: [LoggedinGuard]
   },
   { path: 'NotFound', component: NotFoundComponent },
   { path: 'NotAuthorized', component: NotAuthorizedComponent },

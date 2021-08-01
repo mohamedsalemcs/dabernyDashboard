@@ -6,6 +6,7 @@ import { LanguageService } from '@core/services/language-service/language.servic
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '@core/services/alert-service/alert.service';
+import { HeaderService } from '@core/services/header-service/header.service';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private headerService: HeaderService,
   ) {
     super(translate, languageService);
   }
@@ -41,6 +43,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   /* #region  Events */
   ngOnInit() {
+    this.headerService.changeTile('Login');
     this.initForm();
   }
   /* #endregion */
