@@ -7,7 +7,7 @@ declare let mLayout: any;
   styleUrls: ['./root-layout.component.css']
 })
 export class RootLayoutComponent implements OnInit {
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     mLayout.init();
