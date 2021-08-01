@@ -4,5 +4,8 @@ export const AppUrls = {
   },
   questions: {
     list: '/questions'
+  },
+  tags: {
+    list: '/tags'
   }
 };
