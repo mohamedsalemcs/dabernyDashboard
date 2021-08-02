@@ -45,14 +45,14 @@
 
     <div class="row">
       <!-- Table -->
-      <p-table [value]="dataItems" [paginator]="true" [rows]="10" [autoLayout]="true" [responsive]="true"
-        [loading]="progressSpinner" [columns]="cols" class="full-width">
+      <p-table [value]="itemsList" [paginator]="true" [rows]="10" [autoLayout]="true" [responsive]="true"
+        [loading]="isLoading" [columns]="columns" class="full-width">
         <!-- Header -->
         <ng-template pTemplate="header" let-columns>
           <tr>
-            <th *ngFor="let col of cols" [pSortableColumn]="col.field">
-              <ng-container *ngIf="!col.Hidden">
-                {{ col.header }}
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+              <ng-container *ngIf="!col.hidden">
+                {{ col.header | translate }}
                 <p-sortIcon [field]="col.field" *ngIf="col.type !== 'action'"></p-sortIcon>
               </ng-container>
             </th>
@@ -62,7 +62,7 @@
         <ng-template pTemplate="body" let-dataItem let-columns="columns">
           <tr>
             <td *ngFor="let column of columns">
-              <ng-container *ngIf="!column.Hidden">
+              <ng-container *ngIf="!column.hidden">
                 <!-- Handle general data fields -->
                 <ng-container *ngIf="!column.type || column.type === 'data'">
                   {{
@@ -103,7 +103,7 @@
         </ng-template>
         <!-- Empty Message -->
         <ng-template pTemplate="emptymessage" let-columns>
-          <tr *ngIf="!progressSpinner">
+          <tr *ngIf="!isLoading">
             <td [attr.colspan]="columns.length" class="empty-grid-table">
               لا توجد بيانات
             </td>

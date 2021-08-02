@@ -3,6 +3,7 @@ import { QuestionsRoutingModule } from './questions-routing.module';
 import { CoreModule } from '@core/core.module';
 import { QuestionsListComponent } from './components/questions-list/questions-list.component';
 import { PrimngModule } from '../shared/primng/primng.module';
+import { MessageService, Message } from 'primeng/api';
 
 @NgModule({
   declarations: [QuestionsListComponent],
@@ -10,6 +11,9 @@ import { PrimngModule } from '../shared/primng/primng.module';
     CoreModule,
     PrimngModule,
     QuestionsRoutingModule
+  ],
+  providers: [
+    MessageService
   ]
 })
 export class QuestionsModule { }

@@ -21,7 +21,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const headersConfig = {};
-    const token = '';// this.authService.getToken();
+    const token = this.authService.getToken();
     if (token) {
       headersConfig['Authorization'] = `Bearer ${token}`;
     }

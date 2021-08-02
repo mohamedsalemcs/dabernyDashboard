@@ -22,4 +22,13 @@ export class AlertService {
     // }
     toastr.error(this.translate.instant(message));
   }
+  showSuccessMsg(msg: string) {
+    toastr.success(this.translate.instant(msg));
+    //this.messageService.add({ severity: 'success', summary: '', detail: this.translate.instant(msg) });
+  }
+
+  showErrorMsg(msg: string) {
+    toastr.error(this.translate.instant(msg));
+    //this.messageService.add({ severity: 'error', summary: '', detail: this.translate.instant(msg) });
+  }
 }
