@@ -6,7 +6,8 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { PaginatorModule } from 'primeng/paginator';
 import { TreeModule } from 'primeng/tree';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import {CalendarModule} from 'primeng/calendar';
+import { CalendarModule } from 'primeng/calendar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [],
@@ -14,6 +15,7 @@ import {CalendarModule} from 'primeng/calendar';
     CalendarModule,
     TableModule,
     DialogModule,
+    ConfirmDialogModule,
     ProgressSpinnerModule,
     ContextMenuModule,
     PaginatorModule,
@@ -21,4 +23,4 @@ import {CalendarModule} from 'primeng/calendar';
     AutoCompleteModule
   ]
 })
-export class PrimngModule {}
+export class PrimngModule { }

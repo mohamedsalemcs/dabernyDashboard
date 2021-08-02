@@ -160,5 +160,8 @@
   "Login to Admin":"Login to Admin",
   "Username is required":"Username is required",
   "Password is required":"Password is required",
-  "Remember me":"Remember me"
+  "Remember me":"Remember me",
+  "Yes":"Yes",
+  "No":"No",
+  "Questions List":"Questions List"
 }

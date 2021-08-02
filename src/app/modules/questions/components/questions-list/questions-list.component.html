@@ -1,5 +1,5 @@
 <!-- BEGIN: Subheader -->
-<div class="m-subheader p-0 mb-2">
+<!-- <div class="m-subheader p-0 mb-2">
   <div class="d-flex align-items-center">
     <div class="mr-auto">
       <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
@@ -23,21 +23,21 @@
       </ul>
     </div>
   </div>
-</div>
+</div> -->
 <!-- END: Subheader -->
-
+<p-confirmDialog icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 <div class="m-portlet m-portlet--mobile">
   <!-- BEGIN: Subheader -->
   <div class="m-portlet__head m-subheader d-flex align-items-center">
     <div class="mr-auto">
-      <h3 class="m-subheader__title p-0"> قائمة العملاء</h3>
+      <h3 class="m-subheader__title p-0"> {{'Questions List' | translate}}</h3>
     </div>
-    <div>
+    <!-- <div>
       <button routerLink="/navigation/sales/create-customer" type="button" class="btn btn-primary btn-cons">
         أضف مستخدم جديد
       </button>
-    </div>
+    </div> -->
   </div>
   <!-- END: Subheader -->
 
@@ -50,10 +50,10 @@
         <!-- Header -->
         <ng-template pTemplate="header" let-columns>
           <tr>
-            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            <th *ngFor="let col of columns">
               <ng-container *ngIf="!col.hidden">
                 {{ col.header | translate }}
-                <p-sortIcon [field]="col.field" *ngIf="col.type !== 'action'"></p-sortIcon>
+                <!-- <p-sortIcon [field]="col.field" *ngIf="col.type !== 'action'"></p-sortIcon> -->
               </ng-container>
             </th>
           </tr>
@@ -67,10 +67,10 @@
                 <ng-container *ngIf="!column.type || column.type === 'data'">
                   {{
                   !column.Pipe
-                  ? dataItem[column.field]
+                  ? Reflection.GetValueByProbertyName(dataItem,column.field)
                   : column.Pipe === 'date'
                   ? (dataItem[column.field] | date: column.PipeFormat)
-                  : dataItem[column.field]
+                  : Reflection.GetValueByProbertyName(dataItem,column.field)
                   }}
                 </ng-container>
 
@@ -86,15 +86,15 @@
 
                 <!-- Handle action button fields -->
                 <ng-container *ngIf="column.type === 'action'">
-                  <a href="#"
-                    class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
-                    title="Edit" routerLink="/navigation/sales/update-customer">
-                    <i class="la la-edit"></i>
-                  </a>
-                  <a href="#"
+                  <!-- <a href="#"
                     class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
                     title="Details" data-toggle="modal" data-target="#detailsModal">
                     <i class="la la-info"></i>
+                  </a> -->
+                  <a (click)="delete(dataItem)"
+                    class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+                    title="{{'buttons.delete' | translate}}" data-toggle="modal" data-target="#detailsModal">
+                    <i class="la la-trash"></i>
                   </a>
                 </ng-container>
               </ng-container>
@@ -105,7 +105,7 @@
         <ng-template pTemplate="emptymessage" let-columns>
           <tr *ngIf="!isLoading">
             <td [attr.colspan]="columns.length" class="empty-grid-table">
-              لا توجد بيانات
+              {{'noQuestionsFound' | translate}}
             </td>
           </tr>
         </ng-template>

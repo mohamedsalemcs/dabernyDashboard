@@ -10,6 +10,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgxLoadingModule } from 'ngx-loading';
 import { HttpTokenInterceptor } from '@core/interceptors/http.token.interceptor';
 import { LanguageInterceptor } from '@core/interceptors/language.interceptor';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { LanguageInterceptor } from '@core/interceptors/language.interceptor';
     NgxLoadingModule.forRoot({})
   ],
   providers: [
+    ConfirmationService,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy

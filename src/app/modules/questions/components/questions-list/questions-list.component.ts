@@ -3,12 +3,15 @@ import { BaseComponent } from '@core/base-component/base-component';
 import { LanguageService } from '@core/services/language-service/language.service';
 import { TranslateService } from '@ngx-translate/core';
 import { QuestionSM } from '../../models/question-sm';
-import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
+import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { AlertService } from '@core/services/alert-service/alert.service';
 import { QuestionService } from '../../services/question/question.service';
 import { QuestionListVM } from '../../models/question-list-vm';
 import { map } from 'rxjs/operators';
 import { PagedListMetaData } from '@core/models/PagedListMetaData';
+import { Reflection } from '@core/helpers/reflection';
+import { QuestionStatus } from '../../models/question-status';
+import { HeaderService } from '@core/services/header-service/header.service';
 
 @Component({
   selector: 'app-questions-list',
@@ -29,6 +32,12 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
     type?: string;
     pipeFormat?: string;
   }[];
+  get QuestionStatus() {
+    return QuestionStatus;
+  }
+  get Reflection() {
+    return Reflection;
+  }
   /* #endregion */
 
   /* #region  Parameters */
@@ -40,7 +49,9 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
     translate: TranslateService,
     languageService: LanguageService,
     private alertService: AlertService,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private confirmationService: ConfirmationService,
+    private headerService: HeaderService
   ) {
     super(translate, languageService);
   }
@@ -48,6 +59,7 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
 
   /* #region  Events */
   ngOnInit() {
+    this.headerService.changeTile('Questions List');
     this.reset();
     this.setColumns();
     this.loadData();
@@ -58,9 +70,34 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
   setColumns() {
     this.columns = [
       {
+        field: 'userProfile.user.fullName',
+        header: 'fullName'
+      },
+      {
+        field: 'title',
+        header: 'title'
+      },
+      {
+        field: 'option1',
+        header: 'option1'
+      },
+      {
+        field: 'option2',
+        header: 'option2'
+      },
+      {
+        field: 'option3',
+        header: 'option3'
+      },
+      {
+        field: 'option4',
+        header: 'option4'
+      },
+      {
+        type: 'action',
         field: '',
         header: ''
-      }
+      },
     ];
   }
   reset() {
@@ -94,16 +131,37 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
       },
         error => {
           this.isLoading = false;
-          if (error && error.error) {
-            if (error.error.message) {
-              this.alertService.showErrorMsg(error.error.message);
-            } else if (error.error.messages && error.error.messages.length > 0) {
-              this.alertService.showErrorMsg(error.error.messages.join(' \n ') || 'errors.errorOccured');
-            }
-          } else {
-            this.alertService.showErrorMsg('errors.errorOccured');
-          }
+          this.alertService.error(error);
         });
+  }
+  delete(question: QuestionListVM) {
+    this.confirmationService.confirm({
+      message: this.translate.instant('confirmDeleteQuestion'),
+      header: this.translate.instant('confirm'),
+      acceptLabel: this.translate.instant('Yes'),
+      rejectLabel: this.translate.instant('No'),
+
+      accept: () => {
+
+        this.isLoading = true;
+        this.questionService.delete(question.id)
+          .subscribe(
+            response => {
+              this.isLoading = false;
+              if (response && response.success) {
+                this.reset();
+                this.loadData();
+              } else {
+                this.alertService.showErrorMsg(response.message || 'errors.errorOccured');
+              }
+            },
+            err => {
+              this.isLoading = false;
+              this.alertService.error(err);
+
+            });
+      }
+    });
   }
   /* #endregion */
 }
