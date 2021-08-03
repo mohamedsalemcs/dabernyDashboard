@@ -1,0 +1,115 @@
+<!-- BEGIN: Subheader -->
+<!-- <div class="m-subheader p-0 mb-2">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a href="javascript:;" class="m-nav__link m-nav__link--icon">
+            <i class="m-nav__link-icon la la-home fa-2x"></i>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a href="javascript:;" class="m-nav__link">
+            <span class="m-nav__link-text fs-16">الرئيسية</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a href="javascript:;" class="m-nav__link">
+            <span class="m-nav__link-text fs-16">قائمة العملاء</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div> -->
+<!-- END: Subheader -->
+<p-confirmDialog icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<div class="m-portlet m-portlet--mobile">
+  <!-- BEGIN: Subheader -->
+  <div class="m-portlet__head m-subheader d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title p-0"> {{'Interests List' | translate}}</h3>
+    </div>
+    <!-- <div>
+      <button routerLink="/navigation/sales/create-customer" type="button" class="btn btn-primary btn-cons">
+        أضف مستخدم جديد
+      </button>
+    </div> -->
+  </div>
+  <!-- END: Subheader -->
+
+  <div class="m-portlet__body">
+
+    <div class="row">
+      <!-- Table -->
+      <p-table [value]="itemsList" [paginator]="true" [rows]="10" [autoLayout]="true" [responsive]="true"
+        [loading]="isLoading" [columns]="columns" class="full-width">
+        <!-- Header -->
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns">
+              <ng-container *ngIf="!col.hidden">
+                {{ col.header | translate }}
+                <!-- <p-sortIcon [field]="col.field" *ngIf="col.type !== 'action'"></p-sortIcon> -->
+              </ng-container>
+            </th>
+          </tr>
+        </ng-template>
+        <!-- Body -->
+        <ng-template pTemplate="body" let-dataItem let-columns="columns">
+          <tr>
+            <td *ngFor="let column of columns">
+              <ng-container *ngIf="!column.hidden">
+                <!-- Handle general data fields -->
+                <ng-container *ngIf="!column.type || column.type === 'data'">
+                  {{
+                  !column.Pipe
+                  ? Reflection.GetValueByProbertyName(dataItem,column.field)
+                  : column.Pipe === 'date'
+                  ? (dataItem[column.field] | date: column.PipeFormat)
+                  : Reflection.GetValueByProbertyName(dataItem,column.field)
+                  }}
+                </ng-container>
+
+                <!-- Handle status data fields -->
+                <ng-container *ngIf="column.type === 'status'">
+                  <span class="m-badge status" [ngClass]="{
+                  'm-badge--success': !dataItem[column.field],
+                  'm-badge--danger': dataItem[column.field]
+                }">
+                    {{ dataItem[column.field] ? 'غير مفعل' : 'مفعل' }}
+                  </span>
+                </ng-container>
+
+                <!-- Handle action button fields -->
+                <ng-container *ngIf="column.type === 'action'">
+                  <!-- <a href="#"
+                    class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+                    title="Details" data-toggle="modal" data-target="#detailsModal">
+                    <i class="la la-info"></i>
+                  </a> -->
+                  <a (click)="delete(dataItem)"
+                    class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+                    title="{{'buttons.delete' | translate}}" data-toggle="modal" data-target="#detailsModal">
+                    <i class="la la-trash"></i>
+                  </a>
+                </ng-container>
+              </ng-container>
+            </td>
+          </tr>
+        </ng-template>
+        <!-- Empty Message -->
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr *ngIf="!isLoading">
+            <td [attr.colspan]="columns.length" class="empty-grid-table">
+              {{'noInterestsFound' | translate}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

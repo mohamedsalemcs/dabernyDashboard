@@ -135,6 +135,7 @@
   "confirmPasswordMatch": "كلمة المرور وتأكيد كلمة المرور غير متطابقة.",
   "newPassword":"كلمة المرور الجديدة",
   "confirmDeleteQuestion":"هل أنت متأكد أنك تريد حذف هذا السؤال؟",
+  "confirmDeleteInterest":"هل أنت متأكد أنك تريد حذف هذا الأهتمام؟",
   "No Blocked Users Found":"لم يتم العثور على مستخدمين محظورين",
   "updateQuestion":"تحديث السؤال",
   "Question Expired":"انتهى السؤال ، لذا لا يمكنك تحديثه.",
@@ -161,5 +162,8 @@
   "Yes":"نعم",
   "No":"لا",
   "Questions List":"قائمة الأسئلة",
-  "Question Deleted":"تم حذف السؤال بنجاح."
+  "Question Deleted":"تم حذف السؤال بنجاح.",
+  "Interest Deleted":"تم حذف الأهتمام بنجاح.",
+  "Interest Name":"اسم الاهتمام",
+  "Interests List":"قائمة الاهتمامات"
 }

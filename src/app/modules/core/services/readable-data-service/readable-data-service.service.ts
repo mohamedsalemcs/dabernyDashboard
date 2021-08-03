@@ -20,13 +20,13 @@ export class ReadableDataServiceService<T> extends BaseService {
     return this.http.get<PagedListResult<TResult>>(
       searchModel ? `${this.serviceBaseUrl}?${this.getQueryParams(searchModel)}` : `${this.serviceBaseUrl}`
     );
-  };
+  }
 
   getAll = <TResult = T>(searchModel?: BaseSearchModel): Observable<ListResult<T>> => {
     return this.http.get<ListResult<T>>(
       `${this.serviceBaseUrl}/ListAll?${this.getQueryParams(searchModel)}`
     );
-  };
+  }
 
   getById<TResult = T>(id: number, idQueryStr: string = 'id'): Observable<BaseResponse<T>> {
     return this.http.get<BaseResponse<T>>(`${this.serviceBaseUrl}/GetById?${idQueryStr || 'id'}=${id || ''}`);

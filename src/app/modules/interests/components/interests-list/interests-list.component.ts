@@ -1,35 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@core/base-component/base-component';
+import { Reflection } from '@core/helpers/reflection';
+import { Column } from '@core/models/column';
+import { PagedListMetaData } from '@core/models/PagedListMetaData';
+import { AlertService } from '@core/services/alert-service/alert.service';
+import { HeaderService } from '@core/services/header-service/header.service';
 import { LanguageService } from '@core/services/language-service/language.service';
 import { TranslateService } from '@ngx-translate/core';
-import { QuestionSM } from '../../models/question-sm';
 import { LazyLoadEvent } from 'primeng/api';
-import { AlertService } from '@core/services/alert-service/alert.service';
-import { QuestionService } from '../../services/question/question.service';
-import { QuestionListVM } from '../../models/question-list-vm';
 import { map } from 'rxjs/operators';
-import { PagedListMetaData } from '@core/models/PagedListMetaData';
-import { Reflection } from '@core/helpers/reflection';
-import { QuestionStatus } from '../../models/question-status';
-import { HeaderService } from '@core/services/header-service/header.service';
-import { Column } from '@core/models/column';
+import { InterestSM } from 'src/app/modules/auth/models/interest-sm';
+import { Interest } from 'src/app/modules/profile/models/interest';
+import { QuestionListVM } from 'src/app/modules/questions/models/question-list-vm';
+import { QuestionSM } from 'src/app/modules/questions/models/question-sm';
+import { QuestionService } from 'src/app/modules/questions/services/question/question.service';
+import { InterestService } from '../../services/interest/interest.service';
 
 @Component({
-  selector: 'app-questions-list',
-  templateUrl: './questions-list.component.html',
-  styleUrls: ['./questions-list.component.css']
+  selector: 'app-interests-list',
+  templateUrl: './interests-list.component.html',
+  styleUrls: ['./interests-list.component.css']
 })
-export class QuestionsListComponent extends BaseComponent implements OnInit {
+export class InterestsListComponent extends BaseComponent implements OnInit {
 
   /* #region  Prroperties & Fields */
   isLoading: boolean;
-  searchModel: QuestionSM;
-  itemsList: QuestionListVM[];
+  searchModel: InterestSM;
+  itemsList: Interest[];
   metadata: PagedListMetaData;
   columns: Column[];
-  get QuestionStatus() {
-    return QuestionStatus;
-  }
   get Reflection() {
     return Reflection;
   }
@@ -45,6 +44,7 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
     languageService: LanguageService,
     private alertService: AlertService,
     private questionService: QuestionService,
+    private interestService: InterestService,
     private headerService: HeaderService
   ) {
     super(translate, languageService);
@@ -53,7 +53,7 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
 
   /* #region  Events */
   ngOnInit() {
-    this.headerService.changeTile('Questions List');
+    this.headerService.changeTile('Interests List');
     this.reset();
     this.setColumns();
     this.loadData();
@@ -64,28 +64,8 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
   setColumns() {
     this.columns = [
       {
-        field: 'userProfile.user.fullName',
-        header: 'fullName'
-      },
-      {
-        field: 'title',
-        header: 'title'
-      },
-      {
-        field: 'option1',
-        header: 'option1'
-      },
-      {
-        field: 'option2',
-        header: 'option2'
-      },
-      {
-        field: 'option3',
-        header: 'option3'
-      },
-      {
-        field: 'option4',
-        header: 'option4'
+        field: 'name',
+        header: 'Interest Name'
       },
       {
         type: 'action',
@@ -95,12 +75,12 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
     ];
   }
   reset() {
-    this.searchModel = new QuestionSM(null);
+    this.searchModel = new InterestSM(null);
     this.isLoading = false;
     this.itemsList = null;
     this.metadata = null;
   }
-  loadDataLazy(event: LazyLoadEvent) {
+  loadDataLazy() {
     if (this.metadata.pageNumber < this.metadata.pageCount) {
       this.metadata.pageNumber++;
       this.searchModel.page++;
@@ -110,15 +90,11 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
 
   loadData() {
     this.isLoading = true;
-    this.questionService.getPaged(this.searchModel).pipe(map(res => {
-      this.questionService.configureQuestionsVotesPercent(res.resource.items);
-      return res;
-    }))
+    this.interestService.getAll(this.searchModel)
       .subscribe(response => {
         this.isLoading = false;
         if (response && response.success) {
           this.itemsList = response.resource.items;
-          this.metadata = response.resource.metadata;
         } else {
           this.alertService.errorMsg(response.message || 'errors.errorOccured');
         }
@@ -129,15 +105,15 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
         });
   }
 
-  delete(question: QuestionListVM) {
-    this.alertService.confirmMessage('confirmDeleteQuestion', () => {
+  delete(interest: Interest) {
+    this.alertService.confirmMessage('confirmDeleteInterest', () => {
       this.isLoading = true;
-      this.questionService.delete(question.id)
+      this.interestService.activate(interest.id, false)
         .subscribe(
           response => {
             this.isLoading = false;
             if (response && response.success) {
-              this.alertService.successMsg('Question Deleted');
+              this.alertService.successMsg('Interest Deleted');
               this.reset();
               this.loadData();
             } else {
@@ -150,6 +126,7 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
 
           });
     });
+
   }
   /* #endregion */
 }

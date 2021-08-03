@@ -134,6 +134,7 @@
   "confirmPasswordMatch": "Password and confirm password not matching.",
   "newPassword":"New Password",
   "confirmDeleteQuestion":"Are you sure you want to delete this question?",
+  "confirmDeleteInterest":"Are you sure you want to delete this هnterest?",
   "No Blocked Users Found":"No Blocked Users Found",
   "updateQuestion":"Update Question",
   "Question Expired":"Question Expired, So you can't update it.",
@@ -164,5 +165,9 @@
   "Yes":"Yes",
   "No":"No",
   "Questions List":"Questions List",
-  "Question Deleted":"Question deleted successfully."
+  "Question Deleted":"Question deleted successfully.",
+  "Interest Deleted":"Interest deleted successfully.",
+  "Interest Name":"Interest Name",
+  "Interests List":"Interests List",
+  "noInterestsFound":"No Interests Found"
 }

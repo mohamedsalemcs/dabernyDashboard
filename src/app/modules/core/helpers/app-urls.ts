@@ -8,5 +8,8 @@ export const AppUrls = {
   },
   tags: {
     list: '/tags'
+  },
+  interests: {
+    list: '/interests'
   }
 };

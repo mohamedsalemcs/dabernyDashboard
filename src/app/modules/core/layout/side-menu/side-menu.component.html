@@ -22,7 +22,8 @@
       </li>
 
       <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover"
-        m-menu-link-redirect="1"><a href="javascript:;" class="m-menu__link m-menu__toggle">
+        m-menu-link-redirect="1">
+        <a [routerLink]="[AppUrls.interests.list]" class="m-menu__link m-menu__toggle">
           <i class="m-menu__link-icon flaticon-network"></i>
           <span>{{'Interests' | translate}}</span>
           <!-- <span class="m-menu__link-text">Add</span> -->
