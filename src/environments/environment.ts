@@ -7,7 +7,10 @@ import { Language } from 'src/app/modules/core/enums/language';
 export const environment = {
   production: false,
 
-  apiUrl: 'http://192.168.1.5:2021/api',
+  dabernyServerUrl: 'https://localhost:44358/',
+  apiUrl: 'https://localhost:44358/api',
+  // dabernyServerUrl: 'http://192.168.1.5:2021/',
+  // apiUrl: 'http://192.168.1.5:2021/api',
   langKey: 'lang',
   tokenKey: 'token',
   loginProviderKey: 'loginProvider',

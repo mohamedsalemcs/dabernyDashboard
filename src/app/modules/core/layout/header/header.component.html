@@ -77,19 +77,18 @@
                     <div class="m-dropdown__header m--align-center">
                       <div class="m-card-user m-card-user--skin-light">
                         <div class="m-card-user__pic">
-                          <img src="assets/external/assets/app/media/img/users/user4.jpg"
-                            class="m--img-rounded m--marginless" alt="" />
+                          <img [src]="getProfileImage()" class="m--img-rounded m--marginless" alt="" />
                         </div>
-                        <div class="m-card-user__details">
-                          <span class="m-card-user__name m--font-weight-500">محمد سالم</span>
-                          <a href="" class="m-card-user__email m--font-weight-300 m-link">mohamedsalemcs@gmail.com</a>
+                        <div *ngIf="userProfile" class="m-card-user__details">
+                          <span class="m-card-user__name m--font-weight-500">{{userProfile.user.fullName}}</span>
+                          <a href="" class="m-card-user__email m--font-weight-300 m-link">{{userProfile.email}}</a>
                         </div>
                       </div>
                     </div>
                     <div class="m-dropdown__body pt-0">
                       <div class="m-dropdown__content">
                         <ul class="m-nav m-nav--skin-light">
-                          <li class="m-nav__item">
+                          <!-- <li class="m-nav__item">
                             <a href="profile.html" class="m-nav__link">
                               <i class="m-nav__link-icon flaticon-profile-1"></i>
                               <span class="m-nav__link-title">
@@ -98,12 +97,13 @@
                                 </span>
                               </span>
                             </a>
-                          </li>
+                          </li> -->
 
                           <li class="m-nav__item">
-                            <a routerLink="/auth/login"
-                              class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">تسجيل
-                              خروج</a>
+                            <a (click)="logout()"
+                              class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                              {{'Logout' | translate}}
+                            </a>
                           </li>
                         </ul>
                       </div>

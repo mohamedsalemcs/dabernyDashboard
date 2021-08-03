@@ -2,7 +2,7 @@ import { Language } from 'src/app/modules/core/enums/language';
 
 export const environment = {
   production: true,
-
+  dabernyServerUrl: 'http://52.15.72.219:5050/',
   apiUrl: 'http://52.15.72.219:5050/api',
   langKey: 'b4f31e1d-9643-4043-a98a-f0eab53d0751',
   tokenKey: '0617d017-1e4c-4796-815a-1bbf0c600e68',

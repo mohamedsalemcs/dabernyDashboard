@@ -51,7 +51,7 @@ export class AuthService extends BaseService {
     super(http, `${environment.apiUrl}/Auth`);
 
     this.setSessionAtStartUp();
-
+    debugger;
     if (window.addEventListener) {
       window.addEventListener(
         'storage',
@@ -76,6 +76,8 @@ export class AuthService extends BaseService {
     }
     // do nothing if no value to work with
     if (event.key === 'logoutNow') {
+      console.log('event.key === logoutNow');
+
       this.removeToken();
       this.goToLogin();
     }
@@ -113,7 +115,7 @@ export class AuthService extends BaseService {
     }
   }
   login(credentials: UserLoginVM) {
-    return this.http.post(this.serviceBaseUrl + '/Login', credentials)
+    return this.http.post(this.serviceBaseUrl + '/AdminLogin', credentials)
       .pipe(map((response: BaseResponse<UserRegisterationResult>) => {
         if (response && response.success && response.resource.isVerified && response.resource.isActive) {
           this.saveLogin(response.resource, credentials.rememberMe);
