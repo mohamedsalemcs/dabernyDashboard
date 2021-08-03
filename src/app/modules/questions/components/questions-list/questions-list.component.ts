@@ -134,34 +134,54 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
           this.alertService.error(error);
         });
   }
+
   delete(question: QuestionListVM) {
-    this.confirmationService.confirm({
-      message: this.translate.instant('confirmDeleteQuestion'),
-      header: this.translate.instant('confirm'),
-      acceptLabel: this.translate.instant('Yes'),
-      rejectLabel: this.translate.instant('No'),
+    this.alertService.confirmMessage('confirmDeleteQuestion', () => {
+      this.isLoading = true;
+      this.questionService.delete(question.id)
+        .subscribe(
+          response => {
+            this.isLoading = false;
+            if (response && response.success) {
+              this.reset();
+              this.loadData();
+            } else {
+              this.alertService.showErrorMsg(response.message || 'errors.errorOccured');
+            }
+          },
+          err => {
+            this.isLoading = false;
+            this.alertService.error(err);
 
-      accept: () => {
-
-        this.isLoading = true;
-        this.questionService.delete(question.id)
-          .subscribe(
-            response => {
-              this.isLoading = false;
-              if (response && response.success) {
-                this.reset();
-                this.loadData();
-              } else {
-                this.alertService.showErrorMsg(response.message || 'errors.errorOccured');
-              }
-            },
-            err => {
-              this.isLoading = false;
-              this.alertService.error(err);
-
-            });
-      }
+          });
     });
+    // this.alertService.confirm({
+    //   message: this.translate.instant('confirmDeleteQuestion'),
+    //   header: this.translate.instant('confirm'),
+    //   acceptLabel: this.translate.instant('Yes'),
+    //   rejectLabel: this.translate.instant('No'),
+
+    //   accept: () => {
+
+    //     this.isLoading = true;
+    //     this.questionService.delete(question.id)
+    //       .subscribe(
+    //         response => {
+    //           this.isLoading = false;
+    //           if (response && response.success) {
+    //             this.reset();
+    //             this.loadData();
+    //           } else {
+    //             this.alertService.showErrorMsg(response.message || 'errors.errorOccured');
+    //           }
+    //         },
+    //         err => {
+    //           this.isLoading = false;
+    //           this.alertService.error(err);
+
+    //         });
+    //   }
+    // });
   }
   /* #endregion */
 }

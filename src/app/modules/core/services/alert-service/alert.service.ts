@@ -1,6 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Injectable } from '@angular/core';
 import * as toastr from 'toastr';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -42,17 +43,17 @@ export class AlertService {
       this.showErrorMsg('errors.errorOccured');
     }
   }
-  // public confirmMessage(title: string, onConfirm: Function, confirmButtonText?: string, cancelButtonText?: string) {
-  //   swal.fire({
-  //     title: title,
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonText: confirmButtonText || 'Ok',
-  //     cancelButtonText: cancelButtonText || 'Cancel'
-  //   }).then(result => {
-  //     if (result.value) {
-  //       onConfirm();
-  //     }
-  //   });
-  // }
+  public confirmMessage(title: string, onConfirm: Function, confirmButtonText?: string, cancelButtonText?: string) {
+    Swal.fire({
+      title: this.translate.instant(title),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: confirmButtonText ? this.translate.instant(confirmButtonText) : this.translate.instant('buttons.ok'),
+      cancelButtonText: cancelButtonText ? this.translate.instant(cancelButtonText) : this.translate.instant('buttons.cancel')
+    }).then(result => {
+      if (result.value) {
+        onConfirm();
+      }
+    });
+  }
 }
