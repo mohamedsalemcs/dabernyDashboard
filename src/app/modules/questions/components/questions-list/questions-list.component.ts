@@ -126,7 +126,7 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
           this.itemsList = response.resource.items;
           this.metadata = response.resource.metadata;
         } else {
-          this.alertService.errorMessage(response.message || 'errors.errorOccured');
+          this.alertService.errorMsg(response.message || 'errors.errorOccured');
         }
       },
         error => {
@@ -143,10 +143,11 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
           response => {
             this.isLoading = false;
             if (response && response.success) {
+              this.alertService.successMsg('Question Deleted');
               this.reset();
               this.loadData();
             } else {
-              this.alertService.showErrorMsg(response.message || 'errors.errorOccured');
+              this.alertService.errorMsg(response.message || 'errors.errorOccured');
             }
           },
           err => {

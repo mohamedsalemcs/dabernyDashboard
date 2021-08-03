@@ -81,15 +81,15 @@ export class LoginComponent extends BaseComponent implements OnInit {
             this.resetForm();
             this.router.navigate([this.AppUrls.home]);
           } else {
-            this.alertService.errorMessage(response.message || 'errors.loginFailed');
+            this.alertService.errorMsg(response.message || 'errors.loginFailed');
           }
         } else {
-          this.alertService.errorMessage('errors.loginFailed');
+          this.alertService.errorMsg('errors.loginFailed');
         }
       }, (error) => {
         //loader.dismiss();
         this.isLoading = false;
-        this.alertService.errorMessage(error.error.message || error.error.messages.join(' \n ') || 'errors.errorOccured');
+        this.alertService.error(error);
       });
     }
   }
