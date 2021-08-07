@@ -16,7 +16,7 @@
         <div class="m-stack m-stack--ver m-stack--general">
           <div class="m-stack__item m-stack__item--middle m-brand__logo">
             <a routerLink="/" class="m-brand__logo-wrapper">
-              <img alt="" src="./assets/images/logo2.png" />
+              <img alt="" src="./assets/images/logo-grad.png" />
             </a>
           </div>
           <div class="m-stack__item m-stack__item--middle m-brand__tools">
@@ -67,14 +67,16 @@
                       class="m--img-rounded m--marginless m--img-centered" alt="" />
                   </span>
                   <span class="m-nav__link-icon m-topbar__usericon">
-                    <span class="m-nav__link-icon-wrapper"><i class="flaticon-user-ok"></i></span>
+                    <span class="m-nav__link-icon-wrapper">
+                      <i class="flaticon-user-ok"></i>
+                    </span>
                   </span>
                   <!-- <span class="m-topbar__username m--hide">Nick</span> -->
                 </a>
                 <div class="m-dropdown__wrapper">
                   <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
                   <div class="m-dropdown__inner">
-                    <div class="m-dropdown__header m--align-center">
+                    <div *ngIf="userProfile" class="m-dropdown__header m--align-center">
                       <div class="m-card-user m-card-user--skin-light">
                         <div class="m-card-user__pic">
                           <img [src]="getProfileImage()" class="m--img-rounded m--marginless" alt="" />

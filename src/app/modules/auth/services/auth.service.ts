@@ -51,7 +51,6 @@ export class AuthService extends BaseService {
     super(http, `${environment.apiUrl}/Auth`);
 
     this.setSessionAtStartUp();
-    debugger;
     if (window.addEventListener) {
       window.addEventListener(
         'storage',

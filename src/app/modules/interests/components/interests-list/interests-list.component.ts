@@ -7,12 +7,8 @@ import { AlertService } from '@core/services/alert-service/alert.service';
 import { HeaderService } from '@core/services/header-service/header.service';
 import { LanguageService } from '@core/services/language-service/language.service';
 import { TranslateService } from '@ngx-translate/core';
-import { LazyLoadEvent } from 'primeng/api';
-import { map } from 'rxjs/operators';
 import { InterestSM } from 'src/app/modules/auth/models/interest-sm';
 import { Interest } from 'src/app/modules/profile/models/interest';
-import { QuestionListVM } from 'src/app/modules/questions/models/question-list-vm';
-import { QuestionSM } from 'src/app/modules/questions/models/question-sm';
 import { QuestionService } from 'src/app/modules/questions/services/question/question.service';
 import { InterestService } from '../../services/interest/interest.service';
 
@@ -43,7 +39,6 @@ export class InterestsListComponent extends BaseComponent implements OnInit {
     translate: TranslateService,
     languageService: LanguageService,
     private alertService: AlertService,
-    private questionService: QuestionService,
     private interestService: InterestService,
     private headerService: HeaderService
   ) {
@@ -66,6 +61,11 @@ export class InterestsListComponent extends BaseComponent implements OnInit {
       {
         field: 'name',
         header: 'Interest Name'
+      },
+      {
+        field: 'isActive',
+        header: 'Active',
+        type: 'status'
       },
       {
         type: 'action',
@@ -105,15 +105,15 @@ export class InterestsListComponent extends BaseComponent implements OnInit {
         });
   }
 
-  delete(interest: Interest) {
-    this.alertService.confirmMessage('confirmDeleteInterest', () => {
+  activate(interest: Interest) {
+    this.alertService.confirmMessage('confirmActivateInterest', () => {
       this.isLoading = true;
-      this.interestService.activate(interest.id, false)
+      this.interestService.activate(interest.id, true)
         .subscribe(
           response => {
             this.isLoading = false;
             if (response && response.success) {
-              this.alertService.successMsg('Interest Deleted');
+              this.alertService.successMsg('Interest activated');
               this.reset();
               this.loadData();
             } else {
@@ -128,6 +128,33 @@ export class InterestsListComponent extends BaseComponent implements OnInit {
     });
 
   }
+  deactivate(interest: Interest) {
+    this.alertService.confirmMessage('confirmDeactivateInterest', () => {
+      this.isLoading = true;
+      this.interestService.activate(interest.id, false)
+        .subscribe(
+          response => {
+            this.isLoading = false;
+            if (response && response.success) {
+              this.alertService.successMsg('Interest deactivated');
+              this.reset();
+              this.loadData();
+            } else {
+              this.alertService.errorMsg(response.message || 'errors.errorOccured');
+            }
+          },
+          err => {
+            this.isLoading = false;
+            this.alertService.error(err);
+
+          });
+    });
+
+  }
+  update(interest: Interest) {
+
+  }
+
   /* #endregion */
 }
 

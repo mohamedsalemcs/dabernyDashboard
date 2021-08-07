@@ -51,12 +51,14 @@
     "save": "حفظ",
     "reset": "إعادة تعيين",
     "update": "تعديل",
-    "delete": "حذف",
+    "activate": "تفعيل",
     "continue": "استمر",
     "send": "إرسال",
     "submit": "حفظ",
     "clear": "مسح",
-    "viewDetails": "عرض التفاصيل"
+    "viewDetails": "عرض التفاصيل",
+    "addNewInterest": "أضف اهتمام جديد"
+
   },
   "Title and Config": "العنوان و الاعدادات",
   "title": "العنوان",
@@ -135,7 +137,8 @@
   "confirmPasswordMatch": "كلمة المرور وتأكيد كلمة المرور غير متطابقة.",
   "newPassword":"كلمة المرور الجديدة",
   "confirmDeleteQuestion":"هل أنت متأكد أنك تريد حذف هذا السؤال؟",
-  "confirmDeleteInterest":"هل أنت متأكد أنك تريد حذف هذا الأهتمام؟",
+  "confirmActivateInterest":"هل أنت متأكد أنك تريد تفعيل هذا الأهتمام؟",
+  "confirmDeactivateInterest":"هل أنت متأكد أنك تريد تعطيل هذا الأهتمام؟",
   "No Blocked Users Found":"لم يتم العثور على مستخدمين محظورين",
   "updateQuestion":"تحديث السؤال",
   "Question Expired":"انتهى السؤال ، لذا لا يمكنك تحديثه.",
@@ -164,6 +167,10 @@
   "Questions List":"قائمة الأسئلة",
   "Question Deleted":"تم حذف السؤال بنجاح.",
   "Interest Deleted":"تم حذف الأهتمام بنجاح.",
+  "Interest deactivated":"تم حذف الأهتمام بنجاح.",
+  "Interest activated":"تم تفعيل الأهتمام بنجاح.",
   "Interest Name":"اسم الاهتمام",
-  "Interests List":"قائمة الاهتمامات"
+  "Interests List":"قائمة الاهتمامات",
+  "Active":"مفعل",
+  "Inactive":"غير مفعل"
 }
