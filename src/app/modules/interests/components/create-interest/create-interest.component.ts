@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from '@core/base-component/base-component';
 import { AlertService } from '@core/services/alert-service/alert.service';
 import { LanguageService } from '@core/services/language-service/language.service';
+import { environment } from '@environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { InterestService } from '../../services/interest/interest.service';
 
@@ -17,6 +18,9 @@ export class CreateInterestComponent extends BaseComponent implements OnInit {
   form: FormGroup;
   isLoading: boolean;
   isSubmitted: boolean;
+  get maxImageSize() {
+    return environment.maxImageSize;
+  }
   /* #endregion */
 
   /* #region  Parameters */
@@ -40,6 +44,14 @@ export class CreateInterestComponent extends BaseComponent implements OnInit {
   /* #region  Events */
   ngOnInit() {
     this.initForm();
+  }
+
+  onImageSelected() {
+
+  }
+
+  onRemoveImage() {
+
   }
   /* #endregion */
 

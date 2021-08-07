@@ -14,7 +14,8 @@ export const environment = {
   langKey: 'lang',
   tokenKey: 'token',
   loginProviderKey: 'loginProvider',
-  defaultLanguage: Language.Arabic
+  defaultLanguage: Language.Arabic,
+  maxImageSize: 1000 * 1000 * 5
 };
 export const loading = {
   showLoading: false

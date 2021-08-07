@@ -3,6 +3,7 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { PaginatorModule } from 'primeng/paginator';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [],
@@ -10,7 +11,8 @@ import { PaginatorModule } from 'primeng/paginator';
     TableModule,
     DialogModule,
     ProgressSpinnerModule,
-    PaginatorModule
+    PaginatorModule,
+    FileUploadModule
   ]
 })
 export class PrimngModule { }
