@@ -25,6 +25,7 @@ export class InterestsListComponent extends BaseComponent implements OnInit {
   itemsList: Interest[];
   metadata: PagedListMetaData;
   columns: Column[];
+  showCreate: boolean;
   get Reflection() {
     return Reflection;
   }
@@ -154,7 +155,12 @@ export class InterestsListComponent extends BaseComponent implements OnInit {
   update(interest: Interest) {
 
   }
-
+  showCreateDialog() {
+    this.showCreate = true;
+  }
+  closeModal() {
+    this.showCreate = false;
+  }
   /* #endregion */
 }
 

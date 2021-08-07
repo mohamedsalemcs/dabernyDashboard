@@ -56,8 +56,7 @@
     "send": "إرسال",
     "submit": "حفظ",
     "clear": "مسح",
-    "viewDetails": "عرض التفاصيل",
-    "addNewInterest": "أضف اهتمام جديد"
+    "viewDetails": "عرض التفاصيل"
 
   },
   "Title and Config": "العنوان و الاعدادات",
@@ -169,8 +168,15 @@
   "Interest Deleted":"تم حذف الأهتمام بنجاح.",
   "Interest deactivated":"تم حذف الأهتمام بنجاح.",
   "Interest activated":"تم تفعيل الأهتمام بنجاح.",
+  "Interest Added":"تم إضافة الأهتمام بنجاح.",
+  "Interest updated":"تم تعديل الأهتمام بنجاح.",
   "Interest Name":"اسم الاهتمام",
   "Interests List":"قائمة الاهتمامات",
   "Active":"مفعل",
-  "Inactive":"غير مفعل"
+  "Inactive":"غير مفعل",
+
+  "addNewInterest": "أضف اهتمام جديد",
+  "nameEn":"الاسم بالانجليزية",
+  "nameAr":"اسم بالعربية",
+  "required":"هذه الخانة مطلوبه."
 }

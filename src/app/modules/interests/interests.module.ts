@@ -5,9 +5,13 @@ import { InterestsRoutingModule } from './interests-routing.module';
 import { InterestsListComponent } from './components/interests-list/interests-list.component';
 import { CoreModule } from '@core/core.module';
 import { PrimngModule } from '../shared/primng/primng.module';
+import { CreateInterestComponent } from './components/create-interest/create-interest.component';
 
 @NgModule({
-  declarations: [InterestsListComponent],
+  declarations: [
+    InterestsListComponent,
+    CreateInterestComponent
+  ],
   imports: [
     CoreModule,
     PrimngModule,

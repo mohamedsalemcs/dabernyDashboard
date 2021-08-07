@@ -588,6 +588,9 @@ body .ui-widget {
   font-size: 12px;
   text-align: center;
 }
+body .ui-dialog {
+  text-align: right;
+}
 
 body .ui-table .ui-table-thead > tr > th {
   padding: 0.571em 0.857em;

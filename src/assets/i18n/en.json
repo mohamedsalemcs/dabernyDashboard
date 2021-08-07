@@ -57,8 +57,8 @@
     "send": "Send",
     "submit": "Submit",
     "clear":"Clear",
-    "viewDetails":"View Details",
-    "addNewInterest": "Add New Interest"
+    "viewDetails":"View Details"
+
   },
   "Title and Config":"Title and Config.",
   "title":"Title",
@@ -171,11 +171,16 @@
   "Question Deleted":"Question deleted successfully.",
   "Interest deactivated":"Interest deactivated successfully.",
   "Interest activated":"Interest activated successfully.",
+  "Interest Added":"Interest added successfully.",
+  "Interest updated":"Interest عpdated successfully.",
   "Interest Name":"Interest Name",
   "Interests List":"Interests List",
   "noInterestsFound":"No Interests Found",
   "noTagsFound":"No Tags Found",
   "Active":"Active",
-  "Inactive":"Inactive"
-
+  "Inactive":"Inactive",
+  "addNewInterest": "Add New Interest",
+  "nameEn":"Name English",
+  "nameAr":"Name Arabic",
+  "required":"This field is required"
 }

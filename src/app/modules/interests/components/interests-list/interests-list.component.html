@@ -5,8 +5,8 @@
       <h3 class="m-subheader__title p-0"> {{'Interests List' | translate}}</h3>
     </div>
     <div>
-      <button routerLink="/navigation/sales/create-customer" type="button" class="btn btn-primary btn-cons">
-        {{'buttons.addNewInterest' | translate}}
+      <button (click)="showCreateDialog()" type="button" class="btn btn-primary btn-cons">
+        {{'addNewInterest' | translate}}
       </button>
     </div>
   </div>
@@ -96,3 +96,4 @@
     </div>
   </div>
 </div>
+<app-create-interest [show]="showCreate" (canceled)="closeModal()"></app-create-interest>
