@@ -161,6 +161,10 @@ export class InterestsListComponent extends BaseComponent implements OnInit {
   closeModal() {
     this.showCreate = false;
   }
+  onSaved() {
+    this.showCreate = false;
+    this.loadData();
+  }
   /* #endregion */
 }
 

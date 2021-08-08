@@ -68,16 +68,15 @@
               </div>
               <div class="col-lg-12 px-0 mb-2">
                 <div>
-                  <p-fileUpload [showUploadButton]="false" class="control h-100" [showCancelButton]="false"
-                    [customUpload]="true" [maxFileSize]="maxImageSize" formControlName="image"
-                    [ngClass]="{'is-invalid': (isSubmitted || form.controls.image.touched) && form.controls.image.errors}"
-                    accept="image/*" (onRemove)="onRemoveImage($event)" (onSelect)="onImageSelected($event)">
+                  <p-fileUpload #imageUploader [showUploadButton]="false" [showCancelButton]="false"
+                    [customUpload]="true" [maxFileSize]="maxImageSize" accept="image/*"
+                    (onRemove)="onRemoveImage($event)" (onSelect)="onImageSelected($event)">
                   </p-fileUpload>
                   <!-- <input formControlName="nameAr" type="text" class="form-control"
                     [ngClass]="{'is-invalid': (isSubmitted || form.controls.nameAr.touched) && form.controls.nameAr.errors}"
                     placeholder="{{'nameAr' | translate}}" /> -->
                   <div class="invalid-feedback position-absolute GE_Dinar_One_Medium"
-                    *ngIf="form.controls.nameAr.errors?.required">
+                    *ngIf="isSubmitted && !attachment">
                     {{'required' | translate}}
                   </div>
                 </div>

@@ -96,4 +96,4 @@
     </div>
   </div>
 </div>
-<app-create-interest [show]="showCreate" (canceled)="closeModal()"></app-create-interest>
+<app-create-interest [show]="showCreate" (canceled)="closeModal()" (saved)="onSaved()"></app-create-interest>
