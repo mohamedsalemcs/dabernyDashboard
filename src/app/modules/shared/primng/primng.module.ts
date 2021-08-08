@@ -4,6 +4,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { PaginatorModule } from 'primeng/paginator';
 import { FileUploadModule } from 'primeng/fileupload';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [],
@@ -12,7 +13,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     DialogModule,
     ProgressSpinnerModule,
     PaginatorModule,
-    FileUploadModule
+    FileUploadModule,
+    CheckboxModule
   ]
 })
 export class PrimngModule { }
