@@ -110,7 +110,7 @@ export class QuestionsListComponent extends BaseComponent implements OnInit {
 
   loadData() {
     this.isLoading = true;
-    this.questionService.getPaged(this.searchModel).pipe(map(res => {
+    this.questionService.getAllList(this.searchModel).pipe(map(res => {
       this.questionService.configureQuestionsVotesPercent(res.resource.items);
       return res;
     }))
