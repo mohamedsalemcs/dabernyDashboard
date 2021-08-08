@@ -9,7 +9,6 @@ import { LanguageService } from '@core/services/language-service/language.servic
 import { TranslateService } from '@ngx-translate/core';
 import { InterestSM } from 'src/app/modules/auth/models/interest-sm';
 import { Interest } from 'src/app/modules/profile/models/interest';
-import { QuestionService } from 'src/app/modules/questions/services/question/question.service';
 import { InterestService } from '../../services/interest/interest.service';
 
 @Component({
@@ -26,6 +25,8 @@ export class InterestsListComponent extends BaseComponent implements OnInit {
   metadata: PagedListMetaData;
   columns: Column[];
   showCreate: boolean;
+  showUpdate: boolean;
+  idToUpdate: number;
   get Reflection() {
     return Reflection;
   }
@@ -158,8 +159,20 @@ export class InterestsListComponent extends BaseComponent implements OnInit {
   showCreateDialog() {
     this.showCreate = true;
   }
+  showUpdateDialog(id: number) {
+    this.idToUpdate = id;
+    this.showUpdate = true;
+  }
   closeModal() {
+    this.idToUpdate = null;
     this.showCreate = false;
+    this.showUpdate = false;
+  }
+  onSaved() {
+    this.idToUpdate = null;
+    this.showCreate = false;
+    this.showCreate = false;
+    this.loadData();
   }
   /* #endregion */
 }

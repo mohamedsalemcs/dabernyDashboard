@@ -6,11 +6,13 @@ import { InterestsListComponent } from './components/interests-list/interests-li
 import { CoreModule } from '@core/core.module';
 import { PrimngModule } from '../shared/primng/primng.module';
 import { CreateInterestComponent } from './components/create-interest/create-interest.component';
+import { UpdateInterestComponent } from './components/update-interest/update-interest.component';
 
 @NgModule({
   declarations: [
     InterestsListComponent,
-    CreateInterestComponent
+    CreateInterestComponent,
+    UpdateInterestComponent
   ],
   imports: [
     CoreModule,

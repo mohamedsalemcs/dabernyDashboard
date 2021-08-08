@@ -1,5 +1,5 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BaseComponent } from '@core/base-component/base-component';
 import { FormDataHeplper } from '@core/helpers/form-data-helper';
 import { AlertService } from '@core/services/alert-service/alert.service';
@@ -10,11 +10,11 @@ import { FileUpload } from 'primeng/fileupload';
 import { InterestService } from '../../services/interest/interest.service';
 
 @Component({
-  selector: 'app-create-interest',
-  templateUrl: './create-interest.component.html',
-  styleUrls: ['./create-interest.component.css']
+  selector: 'app-update-interest',
+  templateUrl: './update-interest.component.html',
+  styleUrls: ['./update-interest.component.css']
 })
-export class CreateInterestComponent extends BaseComponent implements OnInit {
+export class UpdateInterestComponent extends BaseComponent implements OnInit {
 
   /* #region  Prroperties & Fields */
   form: FormGroup;
@@ -22,13 +22,24 @@ export class CreateInterestComponent extends BaseComponent implements OnInit {
   isSubmitted: boolean;
   attachment: any;
   @ViewChild('imageUploader') imageUploader: FileUpload;
-
+  item: any;
+  get imagePath() {
+    return this.item ? `${environment.dabernyServerUrl}/${this.item.imagePath}` : null;
+  }
   get maxImageSize() {
     return environment.maxImageSize;
   }
   /* #endregion */
 
   /* #region  Parameters */
+  private _id: number;
+  get id() {
+    return this._id;
+  }
+  @Input() set id(value: number) {
+    this._id = value;
+    this.getById();
+  }
   @Input() show: false;
   @Output() canceled = new EventEmitter();
   @Output() saved = new EventEmitter();
@@ -50,6 +61,7 @@ export class CreateInterestComponent extends BaseComponent implements OnInit {
   /* #region  Events */
   ngOnInit() {
     this.initForm();
+    this.getById();
   }
 
   onRemoveImage() {
@@ -60,6 +72,7 @@ export class CreateInterestComponent extends BaseComponent implements OnInit {
   /* #region  Methods */
   initForm() {
     this.form = this.formBuilder.group({
+      id: [null, Validators.required],
       nameEn: ['', Validators.required],
       nameAr: ['', Validators.required],
       isActive: [true]
@@ -71,6 +84,16 @@ export class CreateInterestComponent extends BaseComponent implements OnInit {
     this.form.reset();
     this.form.get('isActive').setValue(true);
     this.imageUploader.clear();
+  }
+  setForm() {
+    if (this.item) {
+      this.form.setValue({
+        id: this.item.id,
+        nameEn: this.item.nameEn,
+        nameAr: this.item.nameAr,
+        isActive: this.item.isActive
+      })
+    }
   }
   onImageSelected(event) {
     if (event && event.files && event.files.length > 0) {
@@ -113,10 +136,10 @@ export class CreateInterestComponent extends BaseComponent implements OnInit {
       if (this.attachment && this.attachment.blob) {
         fd.append('image', this.attachment.blob, this.attachment.name);
       }
-      this.interestService.create(fd).subscribe(response => {
+      this.interestService.update(fd).subscribe(response => {
         this.isLoading = false;
         if (response && response.success) {
-          this.alertService.successMsg('Interest Added');
+          this.alertService.successMsg('Interest Updated');
           this.reset();
           this.onSave();
         } else {
@@ -145,6 +168,23 @@ export class CreateInterestComponent extends BaseComponent implements OnInit {
     this.show = false;
     if (this.saved) {
       this.saved.emit();
+    }
+  }
+  getById() {
+    if (this.id > 0) {
+      this.isLoading = true;
+      this.interestService.getById(this.id).subscribe(response => {
+        this.isLoading = false;
+        if (response && response.success) {
+          this.item = response.resource;
+          this.setForm();
+        } else {
+          this.alertService.errorMsg(response.message || 'errors.errorOccured');
+        }
+      }, err => {
+        this.isLoading = false;
+        this.alertService.error(err);
+      })
     }
   }
   /* #endregion */

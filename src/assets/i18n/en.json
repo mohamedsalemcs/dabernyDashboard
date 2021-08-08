@@ -181,5 +181,7 @@
   "addNewInterest": "Add New Interest",
   "nameEn": "Name English",
   "nameAr": "Name Arabic",
-  "required": "This field is required"
+  "required": "This field is required",
+  "Interest Updated": "Interest updated successfully.",
+  "Update Interest": "Update Interest"
 }
