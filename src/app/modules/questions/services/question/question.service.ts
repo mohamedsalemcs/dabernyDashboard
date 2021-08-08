@@ -2,6 +2,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { PagedListResult } from '@core/models/PagedListResult';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { DateHelper } from 'src/app/modules/core/helpers/date-helper';
@@ -28,6 +29,12 @@ export class QuestionService extends BaseDataService<QuestionListVM> {
   /* #endregion */
   delete(id: number) {
     return this.http.delete<BaseResponse<any>>(`${this.serviceBaseUrl}?id=${id}`);
+  }
+  getAllList(searchModel) {
+    // return this.http.get(`${this.serviceBaseUrl}/AllListAsync`)
+    return this.http.get<PagedListResult<QuestionListVM>>(
+      searchModel ? `${this.serviceBaseUrl}/AllListAsync?${this.getQueryParams(searchModel)}` : `${this.serviceBaseUrl}/AllListAsync`
+    );
   }
   configureQuestionVotesPercent(question: QuestionListVM) {
     if (question) {

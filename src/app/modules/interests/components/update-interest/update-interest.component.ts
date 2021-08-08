@@ -129,14 +129,14 @@ export class UpdateInterestComponent extends BaseComponent implements OnInit {
   }
   save() {
     this.isSubmitted = true;
-    if (this.form.valid && this.attachment) {
+    if (this.form.valid) {
       this.isLoading = true;
       const model = this.form.value;
       const fd = FormDataHeplper.toFormData(model);
       if (this.attachment && this.attachment.blob) {
         fd.append('image', this.attachment.blob, this.attachment.name);
       }
-      this.interestService.update(fd).subscribe(response => {
+      this.interestService.update(fd, false, '/update').subscribe(response => {
         this.isLoading = false;
         if (response && response.success) {
           this.alertService.successMsg('Interest Updated');
