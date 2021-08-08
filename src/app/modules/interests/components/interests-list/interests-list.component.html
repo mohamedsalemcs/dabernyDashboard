@@ -74,7 +74,8 @@
                     title="{{'buttons.activate' | translate}}" data-toggle="modal" data-target="#detailsModal">
                     <i class="la la-recycle"></i>
                   </a>
-                  <a class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+                  <a (click)="showUpdateDialog(dataItem.id)"
+                    class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
                     title="{{'buttons.update' | translate}}" data-toggle="modal" d ata-target="#detailsModal">
                     <i class="fas fa-edit fa-lg"></i>
                   </a>
@@ -97,3 +98,5 @@
   </div>
 </div>
 <app-create-interest [show]="showCreate" (canceled)="closeModal()" (saved)="onSaved()"></app-create-interest>
+<app-update-interest [id]="idToUpdate" [show]="showUpdate" (canceled)="closeModal()" (saved)="onSaved()">
+</app-update-interest>
