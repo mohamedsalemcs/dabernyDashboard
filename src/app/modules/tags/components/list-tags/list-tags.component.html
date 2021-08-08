@@ -2,15 +2,14 @@
   <!-- BEGIN: Subheader -->
   <div class="m-portlet__head m-subheader d-flex align-items-center">
     <div class="mr-auto">
-      <h3 class="m-subheader__title p-0"> {{'Tags List' | translate}}</h3>
+      <h3 class="m-subheader__title p-0"> {{'Interests List' | translate}}</h3>
     </div>
-    <!-- <div>
-      <button routerLink="/navigation/sales/create-customer" type="button" class="btn btn-primary btn-cons">
-        أضف مستخدم جديد
+    <div>
+      <button (click)="showCreateDialog()" type="button" class="btn btn-primary btn-cons">
+        {{'addNewInterest' | translate}}
       </button>
-    </div> -->
+    </div>
   </div>
-
   <!-- END: Subheader -->
 
   <div class="m-portlet__body">
@@ -49,25 +48,37 @@
                 <!-- Handle status data fields -->
                 <ng-container *ngIf="column.type === 'status'">
                   <span class="m-badge status" [ngClass]="{
-                  'm-badge--success': !dataItem[column.field],
-                  'm-badge--danger': dataItem[column.field]
+                  'm-badge--success': dataItem[column.field],
+                  'm-badge--danger': !dataItem[column.field]
                 }">
-                    {{ dataItem[column.field] ? 'غير مفعل' : 'مفعل' }}
+                    <span *ngIf="dataItem[column.field]">
+                      <i class="la la-check"></i>
+                      {{'Active' | translate}}
+                    </span>
+                    <span *ngIf="!dataItem[column.field]">
+                      <i class="la la-times"></i>
+                      {{'Inactive' | translate}}
+                    </span>
                   </span>
                 </ng-container>
 
                 <!-- Handle action button fields -->
                 <ng-container *ngIf="column.type === 'action'">
-                  <!-- <a href="#"
+                  <a *ngIf="dataItem.isActive === true" (click)="deactivate(dataItem)"
                     class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
-                    title="Details" data-toggle="modal" data-target="#detailsModal">
-                    <i class="la la-info"></i>
-                  </a> -->
-                  <a (click)="delete(dataItem)"
-                    class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
-                    title="{{'buttons.delete' | translate}}" data-toggle="modal" data-target="#detailsModal">
+                    title="{{'buttons.deactivate' | translate}}" data-toggle="modal" data-target="#detailsModal">
                     <i class="la la-trash"></i>
                   </a>
+                  <a *ngIf="dataItem.isActive !== true" (click)="activate(dataItem)"
+                    class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+                    title="{{'buttons.activate' | translate}}" data-toggle="modal" data-target="#detailsModal">
+                    <i class="la la-recycle"></i>
+                  </a>
+                  <a class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+                    title="{{'buttons.update' | translate}}" data-toggle="modal" d ata-target="#detailsModal">
+                    <i class="fas fa-edit fa-lg"></i>
+                  </a>
+
                 </ng-container>
               </ng-container>
             </td>
@@ -77,10 +88,11 @@
         <ng-template pTemplate="emptymessage" let-columns>
           <tr *ngIf="!isLoading">
             <td [attr.colspan]="columns.length" class="empty-grid-table">
-              {{'noTagsFound' | translate}}
+              {{'noInterestsFound' | translate}}
             </td>
           </tr>
         </ng-template>
       </p-table>
     </div>
   </div>
+</div>

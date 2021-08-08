@@ -65,7 +65,7 @@ export class InterestsListComponent extends BaseComponent implements OnInit {
       },
       {
         field: 'isActive',
-        header: 'Active',
+        header: 'status',
         type: 'status'
       },
       {
