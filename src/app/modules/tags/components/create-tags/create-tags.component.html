@@ -1,3 +1,97 @@
-<p>
-  create-tags works!
-</p>
+<p-dialog position="center" [(visible)]="show" [style]="{width: '75vw'}" [modal]="true" (onHide)="onHide()">
+  <p-header>{{'addNewTag' | translate}} </p-header>
+
+
+  <!--begin::Portlet-->
+  <div class="m-portlet m-0">
+    <div class="m-portlet__head">
+      <div class="m-portlet__head-caption">
+        <div class="m-portlet__head-title">
+          <h3 class="m-portlet__head-text">{{'addNewTag' | translate}}</h3>
+        </div>
+      </div>
+    </div>
+
+    <!--begin::Form-->
+    <form [formGroup]="form" (ngSubmit)="save()" class="m-form m-form--fit m-form--label-align-right"
+      autocomplete="off">
+      <div class="modal-body">
+        <div class="row mx-0">
+
+          <!-- Input Field -->
+          <div class="col-lg-5 mb-4 col-5">
+            <div class="row mx-0">
+              <div class="col-lg-12 px-0 mb-2">
+                <div>
+                  <span class="text-muted">{{'nameEn' | translate}}</span>
+                </div>
+              </div>
+              <div class="col-lg-12 px-0 mb-2">
+                <div>
+                  <input formControlName="nameEn" type="text" class="form-control"
+                    [ngClass]="{'is-invalid': (isSubmitted || form.controls.nameEn.touched) && form.controls.nameEn.errors}"
+                    placeholder="{{'nameEn' | translate}}" />
+                  <div class="invalid-feedback position-absolute GE_Dinar_One_Medium"
+                    *ngIf="form.controls.nameEn.errors?.required">
+                    {{'required' | translate}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5 mb-4 col-5">
+            <div class="row mx-0">
+              <div class="col-lg-12 px-0 mb-2">
+                <div>
+                  <span class="text-muted">{{'nameAr' | translate}}</span>
+                </div>
+              </div>
+              <div class="col-lg-12 px-0 mb-2">
+                <div>
+                  <input formControlName="nameAr" type="text" class="form-control"
+                    [ngClass]="{'is-invalid': (isSubmitted || form.controls.nameAr.touched) && form.controls.nameAr.errors}"
+                    placeholder="{{'nameAr' | translate}}" />
+                  <div class="invalid-feedback position-absolute GE_Dinar_One_Medium"
+                    *ngIf="form.controls.nameAr.errors?.required">
+                    {{'required' | translate}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 mb-4 col-2">
+            <div class="row mx-0">
+              <div class="col-lg-12 px-0 mb-2">
+                <div>
+                  <span class="text-muted">{{'Active' | translate}}</span>
+                </div>
+              </div>
+              <div class="col-lg-12 px-0 mb-2">
+                <div>
+                  <p-checkbox [binary]="true" [formControl]="form.controls['isActive']"></p-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="m-form__actions m-form__actions mt-4">
+          <div class="row">
+            <div class="col-lg-9 ml-lg-auto">
+              <button type="submit" [disabled]="isLoading || form.invalid"
+                class="btn btn-cons btn-save-cancel btn-primary">
+                {{'buttons.save' | translate}}
+              </button>&nbsp;&nbsp;
+              <button (click)="close()" type="button" class="btn btn-save-cancel btn-gray">
+                {{'buttons.cancel' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+    <!--end::Form-->
+  </div>
+</p-dialog>

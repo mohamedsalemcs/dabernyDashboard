@@ -170,7 +170,7 @@
   "Interest deactivated": "Interest deactivated successfully.",
   "Interest activated": "Interest activated successfully.",
   "Interest Added": "Interest added successfully.",
-  "Interest updated": "Interest عpdated successfully.",
+  "Interest updated": "Interest updated successfully.",
   "Interest Name": "Interest Name",
   "Interests List": "Interests List",
   "noInterestsFound": "No Interests Found",
@@ -183,5 +183,17 @@
   "nameAr": "Name Arabic",
   "required": "This field is required",
   "Interest Updated": "Interest updated successfully.",
-  "Update Interest": "Update Interest"
+  "Update Interest": "Update Interest",
+  "Tags List":"Tags List",
+  "addNewTag":"Add New Tag",
+  "Name":"Name",
+  "confirmActivateTag": "Are you sure you want to activate this tag?",
+  "confirmDeactivateTag": "Are you sure you want to deactivate this tag?",
+  "Tag Updated": "Tag updated successfully.",
+  "Update Tag": "Update Tag",
+  "Tag deactivated": "Tag deactivated successfully.",
+  "Tag activated": "Tag activated successfully.",
+  "Tag Added": "Tag added successfully.",
+  "Tag updated": "Tag updated successfully.",
+  "Tag Name": "Tag Name"
 }

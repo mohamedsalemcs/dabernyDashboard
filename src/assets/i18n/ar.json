@@ -171,6 +171,7 @@
   "Interest updated": "تم تعديل الأهتمام بنجاح.",
   "Interest Name": "اسم الاهتمام",
   "Interests List": "قائمة الاهتمامات",
+  "noInterestsFound":"لا توجد اهتمامات",
   "Active": "مفعل",
   "status": "الحالة",
   "Inactive": "غير مفعل",
@@ -179,5 +180,20 @@
   "nameAr": "اسم بالعربية",
   "required": "هذه الخانة مطلوبه.",
   "Interest Updated": "تم تعديل الأهتمام بنجاح.",
-  "Update Interest": "تعديل الاهتمام "
+  "Update Interest": "تعديل الاهتمام ",
+  "Tags List":"قائمة العلامات",
+  "addNewTag":"أضف علامة جديدة",
+  "Name":"الأسم",
+  "confirmActivateTag": "هل أنت متأكد أنك تريد تفعيل هذه العلامة؟",
+  "confirmDeactivateTag": "هل أنت متأكد أنك تريد تعطيل هذه العلامة؟",
+  "Tag Updated": "تم تعديل العلامة بنجاح.",
+  "Update Tag": "تعديل العلامة ",
+  "Tag Deleted": "تم حذف العلامة بنجاح.",
+  "Tag deactivated": "تم حذف العلامة بنجاح.",
+  "Tag activated": "تم تفعيل العلامة بنجاح.",
+  "Tag Added": "تم إضافة العلامة بنجاح.",
+  "Tag updated": "تم تعديل العلامة بنجاح.",
+  "Tag Name": "اسم العلامة",
+  "noTagsFound":"لا توجد علامات"
+
 }

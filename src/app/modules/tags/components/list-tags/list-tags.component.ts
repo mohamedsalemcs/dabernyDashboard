@@ -1,4 +1,3 @@
-import { Tag } from './../../../profile/models/tag';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@core/base-component/base-component';
 import { Reflection } from '@core/helpers/reflection';
@@ -9,8 +8,8 @@ import { HeaderService } from '@core/services/header-service/header.service';
 import { LanguageService } from '@core/services/language-service/language.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TagService } from '../../services/tag/tag.service';
-import { InterestSM } from 'src/app/modules/auth/models/interest-sm';
-import { Interest } from 'src/app/modules/profile/models/user-profile-interest';
+import { SearchModel } from '@core/models/searchmodel';
+import { TagListVm } from '../../models/tag-list-vm';
 
 @Component({
   selector: 'app-list-tags',
@@ -21,10 +20,13 @@ export class ListTagsComponent extends BaseComponent implements OnInit {
 
   /* #region  Prroperties & Fields */
   isLoading: boolean;
-  searchModel: InterestSM;
-  itemsList: any[];
+  searchModel: SearchModel;
+  itemsList: TagListVm[];
   metadata: PagedListMetaData;
   columns: Column[];
+  showCreate: boolean;
+  showUpdate: boolean;
+  idToUpdate: number;
   get Reflection() {
     return Reflection;
   }
@@ -39,8 +41,8 @@ export class ListTagsComponent extends BaseComponent implements OnInit {
     translate: TranslateService,
     languageService: LanguageService,
     private alertService: AlertService,
-    private headerService: HeaderService,
-    private tagService: TagService
+    private tagService: TagService,
+    private headerService: HeaderService
   ) {
     super(translate, languageService);
   }
@@ -59,22 +61,27 @@ export class ListTagsComponent extends BaseComponent implements OnInit {
   setColumns() {
     this.columns = [
       {
-        field: 'name',
-        header: 'Tag Name'
+        field: 'nameAr',
+        header: 'nameAr'
       },
       {
-        field: 'status',
-        header: 'Status'
+        field: 'nameEn',
+        header: 'nameEn'
+      },
+      {
+        field: 'isActive',
+        header: 'status',
+        type: 'status'
       },
       {
         type: 'action',
         field: '',
-        header: 'Action'
+        header: ''
       },
     ];
   }
   reset() {
-    this.searchModel = new InterestSM(null);
+    this.searchModel = new SearchModel();
     this.isLoading = false;
     this.itemsList = null;
     this.metadata = null;
@@ -86,9 +93,10 @@ export class ListTagsComponent extends BaseComponent implements OnInit {
       this.loadData();
     }
   }
+
   loadData() {
     this.isLoading = true;
-    this.tagService.getAll(this.searchModel)
+    this.tagService.getAll(this.searchModel, 'GetAll')
       .subscribe(response => {
         this.isLoading = false;
         if (response && response.success) {
@@ -102,10 +110,11 @@ export class ListTagsComponent extends BaseComponent implements OnInit {
           this.alertService.error(error);
         });
   }
-  activate(interest: Interest) {
-    this.alertService.confirmMessage('confirmActivateInterest', () => {
+
+  activate(tag: TagListVm) {
+    this.alertService.confirmMessage('confirmActivateTag', () => {
       this.isLoading = true;
-      this.tagService.activate(interest.id, true)
+      this.tagService.activate(tag.id, true)
         .subscribe(
           response => {
             this.isLoading = false;
@@ -125,10 +134,10 @@ export class ListTagsComponent extends BaseComponent implements OnInit {
     });
 
   }
-  deactivate(interest: Interest) {
-    this.alertService.confirmMessage('confirmDeactivateInterest', () => {
+  deactivate(tag: TagListVm) {
+    this.alertService.confirmMessage('confirmDeactivateTag', () => {
       this.isLoading = true;
-      this.tagService.activate(interest.id, false)
+      this.tagService.activate(tag.id, false)
         .subscribe(
           response => {
             this.isLoading = false;
@@ -149,4 +158,24 @@ export class ListTagsComponent extends BaseComponent implements OnInit {
 
   }
 
+  showCreateDialog() {
+    this.showCreate = true;
+  }
+  showUpdateDialog(id: number) {
+    this.idToUpdate = id;
+    this.showUpdate = true;
+  }
+  closeModal() {
+    this.idToUpdate = null;
+    this.showCreate = false;
+    this.showUpdate = false;
+  }
+  onSaved() {
+    this.idToUpdate = null;
+    this.showCreate = false;
+    this.showCreate = false;
+    this.loadData();
+  }
+  /* #endregion */
 }
+

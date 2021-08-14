@@ -2,11 +2,11 @@
   <!-- BEGIN: Subheader -->
   <div class="m-portlet__head m-subheader d-flex align-items-center">
     <div class="mr-auto">
-      <h3 class="m-subheader__title p-0"> {{'Interests List' | translate}}</h3>
+      <h3 class="m-subheader__title p-0"> {{'Tags List' | translate}}</h3>
     </div>
     <div>
       <button (click)="showCreateDialog()" type="button" class="btn btn-primary btn-cons">
-        {{'addNewInterest' | translate}}
+        {{'addNewTag' | translate}}
       </button>
     </div>
   </div>
@@ -74,7 +74,8 @@
                     title="{{'buttons.activate' | translate}}" data-toggle="modal" data-target="#detailsModal">
                     <i class="la la-recycle"></i>
                   </a>
-                  <a class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+                  <a (click)="showUpdateDialog(dataItem.id)"
+                    class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
                     title="{{'buttons.update' | translate}}" data-toggle="modal" d ata-target="#detailsModal">
                     <i class="fas fa-edit fa-lg"></i>
                   </a>
@@ -88,7 +89,7 @@
         <ng-template pTemplate="emptymessage" let-columns>
           <tr *ngIf="!isLoading">
             <td [attr.colspan]="columns.length" class="empty-grid-table">
-              {{'noInterestsFound' | translate}}
+              {{'noTagsFound' | translate}}
             </td>
           </tr>
         </ng-template>
@@ -96,3 +97,6 @@
     </div>
   </div>
 </div>
+<app-create-tags [show]="showCreate" (canceled)="closeModal()" (saved)="onSaved()"></app-create-tags>
+<app-update-tags [id]="idToUpdate" [show]="showUpdate" (canceled)="closeModal()" (saved)="onSaved()">
+</app-update-tags>

@@ -3,8 +3,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseResponse } from '@core/models/BaseResponse';
+import { BaseDataService } from '@core/services/base-data-service/base-data-service';
 import { environment } from '@environments/environment';
-import { ReadableDataServiceService } from 'src/app/modules/core/services/readable-data-service/readable-data-service.service';
 import { TagListVm } from '../../models/tag-list-vm';
 
 /* #endregion */
@@ -12,7 +12,7 @@ import { TagListVm } from '../../models/tag-list-vm';
 @Injectable({
   providedIn: 'root'
 })
-export class TagService extends ReadableDataServiceService<TagListVm> {
+export class TagService extends BaseDataService<TagListVm> {
 
   constructor(
     http: HttpClient

@@ -22,9 +22,9 @@ export class ReadableDataServiceService<T> extends BaseService {
     );
   }
 
-  getAll = <TResult = T>(searchModel?: BaseSearchModel): Observable<ListResult<T>> => {
+  getAll = <TResult = T>(searchModel?: BaseSearchModel, apiName: string = 'ListAll'): Observable<ListResult<T>> => {
     return this.http.get<ListResult<T>>(
-      `${this.serviceBaseUrl}/ListAll?${this.getQueryParams(searchModel)}`
+      `${this.serviceBaseUrl}/${apiName || 'ListAll'}?${this.getQueryParams(searchModel)}`
     );
   }
 
