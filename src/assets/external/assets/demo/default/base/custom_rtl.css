@@ -32,9 +32,10 @@
 }
 
 body {
-  font-size: 100% !important;
-  font-family: MyriadProSemibold;
+  font-size: 130% !important;
+  font-family: MyriadProSemibold !important;
 }
+
 /*General Classes*/
 
 .box-shadow {
@@ -585,7 +586,7 @@ body {
 
 body .ui-widget {
   font-family: MyriadProSemibold !important;
-  font-size: 12px;
+  /* font-size: 12px; */
   text-align: center;
 }
 body .ui-dialog {
@@ -598,6 +599,13 @@ body .ui-table .ui-table-thead > tr > th {
   font-weight: 700;
   color: #575962;
   background-color: #f4f3f8;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+body .ui-table .ui-table-tbody > tr > td {
+  padding: 3px 0.857em;
+  font-size: 15px;
 }
 
 body .ui-table .ui-sortable-column .ui-sortable-column-icon {
@@ -785,4 +793,95 @@ body
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.16);
+}
+
+/*
+*  11- * File Upload
+*/
+
+body .ui-fileupload {
+  display: flex;
+  align-items: center;
+}
+
+body .ui-fileupload .ui-fileupload-buttonbar {
+  background-color: unset;
+  border: 0;
+}
+
+body .ui-fileupload .ui-fileupload-content {
+  padding: 0;
+  border: 0;
+  background-color: unset;
+  right: 105px;
+}
+
+.file-upload {
+  background-color: #f7f7f7;
+  margin-bottom: 1rem;
+}
+
+.ui-fileupload-row > div {
+  word-break: break-all;
+}
+
+.ui-fileupload-row.div {
+  display: none;
+}
+
+.ui-fileupload .ui-button {
+  background-color: #16376d;
+  border: 1px solid #16376d;
+  height: calc(2.95rem + 2px);
+  line-height: 2rem !important;
+}
+
+body .ui-fileupload-choose:not(.ui-state-disabled):hover {
+  background-color: #12408b;
+  border: 1px solid #12408b;
+}
+
+body .ui-button.ui-button-text-icon-left .ui-button-text {
+  line-height: 26px;
+}
+.ui-fileupload p-button {
+  margin-left: 5px;
+}
+
+body .ui-fileupload .ui-fileupload-buttonbar .ui-button {
+  margin-right: 0;
+}
+
+body .ui-button.ui-button-icon-only {
+  height: calc(2.7rem + 2px);
+}
+
+.ui-fileupload-files {
+  position: relative;
+  top: -11px;
+  width: 374px;
+  background: #ddd;
+}
+
+.m-portlet {
+  margin-bottom: 0;
+}
+
+.m-portlet .m-portlet__head {
+  height: 4rem;
+}
+.m-portlet .m-portlet__body {
+  padding: 1.2rem 2.2rem;
+}
+@media (min-width: 1025px) {
+  .m-footer--push.m-aside-left--enabled:not(.m-footer--fixed) .m-aside-right,
+  .m-footer--push.m-aside-left--enabled:not(.m-footer--fixed) .m-wrapper {
+    margin-bottom: 0;
+  }
+}
+
+.m-card-user .m-card-user__pic img {
+  height: 70%;
+  max-height: 70px;
+  border-radius: 50%;
 }

@@ -13,8 +13,7 @@
     </div>
 
     <!--begin::Form-->
-    <form [formGroup]="form" (ngSubmit)="save()" class="m-form m-form--fit m-form--label-align-right"
-      autocomplete="off">
+    <form [formGroup]="form" (ngSubmit)="save()" class="m-form m-form--fit m-form--label-align-right" autocomplete="off">
       <div class="modal-body">
         <div class="row mx-0">
 
@@ -28,11 +27,8 @@
               </div>
               <div class="col-lg-12 px-0 mb-2">
                 <div>
-                  <input formControlName="nameEn" type="text" class="form-control"
-                    [ngClass]="{'is-invalid': (isSubmitted || form.controls.nameEn.touched) && form.controls.nameEn.errors}"
-                    placeholder="{{'nameEn' | translate}}" />
-                  <div class="invalid-feedback position-absolute GE_Dinar_One_Medium"
-                    *ngIf="form.controls.nameEn.errors?.required">
+                  <input formControlName="nameEn" type="text" class="form-control" [ngClass]="{'is-invalid': (isSubmitted || form.controls.nameEn.touched) && form.controls.nameEn.errors}" placeholder="{{'nameEn' | translate}}" />
+                  <div class="invalid-feedback position-absolute GE_Dinar_One_Medium" *ngIf="form.controls.nameEn.errors?.required">
                     {{'required' | translate}}
                   </div>
                 </div>
@@ -48,11 +44,8 @@
               </div>
               <div class="col-lg-12 px-0 mb-2">
                 <div>
-                  <input formControlName="nameAr" type="text" class="form-control"
-                    [ngClass]="{'is-invalid': (isSubmitted || form.controls.nameAr.touched) && form.controls.nameAr.errors}"
-                    placeholder="{{'nameAr' | translate}}" />
-                  <div class="invalid-feedback position-absolute GE_Dinar_One_Medium"
-                    *ngIf="form.controls.nameAr.errors?.required">
+                  <input formControlName="nameAr" type="text" class="form-control" [ngClass]="{'is-invalid': (isSubmitted || form.controls.nameAr.touched) && form.controls.nameAr.errors}" placeholder="{{'nameAr' | translate}}" />
+                  <div class="invalid-feedback position-absolute GE_Dinar_One_Medium" *ngIf="form.controls.nameAr.errors?.required">
                     {{'required' | translate}}
                   </div>
                 </div>
@@ -82,15 +75,12 @@
               </div>
               <div class="col-lg-12 px-0 mb-2">
                 <div>
-                  <p-fileUpload #imageUploader [showUploadButton]="false" [showCancelButton]="false"
-                    [customUpload]="true" [maxFileSize]="maxImageSize" accept="image/*" (onRemove)="onRemoveImage()"
-                    (onSelect)="onImageSelected($event)">
+                  <p-fileUpload #imageUploader [showUploadButton]="false" [showCancelButton]="false" class="d-block form-control" [customUpload]="true" [maxFileSize]="maxImageSize" accept="image/*" (onRemove)="onRemoveImage()" (onSelect)="onImageSelected($event)">
                   </p-fileUpload>
                   <!-- <input formControlName="nameAr" type="text" class="form-control"
                     [ngClass]="{'is-invalid': (isSubmitted || form.controls.nameAr.touched) && form.controls.nameAr.errors}"
                     placeholder="{{'nameAr' | translate}}" /> -->
-                  <div class="invalid-feedback position-absolute GE_Dinar_One_Medium"
-                    *ngIf="isSubmitted && !attachment">
+                  <div class="invalid-feedback position-absolute GE_Dinar_One_Medium" *ngIf="isSubmitted && !attachment">
                     {{'required' | translate}}
                   </div>
                 </div>
@@ -103,8 +93,7 @@
         <div class="m-form__actions m-form__actions mt-4">
           <div class="row">
             <div class="col-lg-9 ml-lg-auto">
-              <button type="submit" [disabled]="isLoading || form.invalid"
-                class="btn btn-cons btn-save-cancel btn-primary">
+              <button type="submit" [disabled]="isLoading || form.invalid" class="btn btn-cons btn-save-cancel btn-primary">
                 {{'buttons.save' | translate}}
               </button>&nbsp;&nbsp;
               <button (click)="close()" type="button" class="btn btn-save-cancel btn-gray">
