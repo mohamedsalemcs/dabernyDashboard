@@ -885,3 +885,16 @@ body .ui-button.ui-button-icon-only {
   max-height: 70px;
   border-radius: 50%;
 }
+
+.m-form .m-form__actions {
+  padding: 0;
+  padding-top: 12px;
+}
+
+.ui-fileupload-row > div {
+  padding: 0 1em;
+}
+
+.ui-fileupload-files img {
+  height: 38px;
+}
